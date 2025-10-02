@@ -1,6 +1,7 @@
 package com.teste.demo.repository;
 
 import com.teste.demo.model.Produto;
+import com.teste.demo.model.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class ProdutoRepository {
     public Produto atualizar(Produto produto) {
         Optional<Produto> produtoExistente = obterPorId(produto.getId());
         if (produtoExistente.isEmpty()) {
-            throw new InputMismatchException("Produto não encontrado");
+            throw new ResourceNotFoundException("Produto não encontrado");
         }
 
         deletar(produto.getId());
